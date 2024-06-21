@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Questionnaire">
+
+    <TextView
+        android:id="@+id/questionnaireTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextPrimary"
+        android:text="What's Your Dietary Preference?"
+        android:textSize="32sp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="40dp" />
+
+    <RadioGroup
+        android:id="@+id/diet_radio_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/questionnaireTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp">
+
+        <RadioButton
+            android:id="@+id/radio_veg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian"
+            android:textSize="22sp"
+            android:textColor="@color/colorTextPrimary" />
+
+        <RadioButton
+            android:id="@+id/radio_non_veg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non-Vegetarian"
+            android:textSize="22sp"
+            android:textColor="@color/colorTextPrimary" />
+
+        <RadioButton
+            android:id="@+id/radio_pescetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pescetarian"
+            android:textSize="22sp"
+            android:textColor="@color/colorTextPrimary" />
+
+        <RadioButton
+            android:id="@+id/radio_vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan"
+            android:textSize="22sp"
+            android:textColor="@color/colorTextPrimary" />
+
+        <RadioButton
+            android:id="@+id/radio_paleo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Paleo"
+            android:textSize="22sp"
+            android:textColor="@color/colorTextPrimary" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="We use this information to calculate your needs and make personalized recommendations."
+        app:layout_constraintBottom_toTopOf="@+id/save_button"
+        android:textColor="@color/colorSecondary"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:paddingRight="32dp"
+        android:paddingLeft="32dp"
+        android:layout_marginBottom="12dp"/>
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:padding="12dp"
+        android:textSize="16sp"
+        android:text="Save"
+        android:textColor="@color/colorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diet_radio_group"
+        android:layout_marginTop="250dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
