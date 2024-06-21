@@ -58,3 +58,4 @@ This meal planner application for Android helps users discover and plan meals ba
 - **Navigation Components**: For managing navigation and user flow in the app.
 - **Material Design**: For implementing user interface components like buttons, dialogs, and navigation bars.
 
+#### So far I have completed all of the UI, and the log-in, register, onboarding and home screen implementation. 
