@@ -20,18 +20,21 @@ This meal planner application for Android helps users discover and plan meals ba
   - Home
   - Shopping List
   - Favorites
-  - Settings
+  - Search
   
 #### Home Screen
-- **Search Functionality**: Users can search for ingredients or cuisines.
-- **Recipe Display**: A RecyclerView displays the recipe name and an image of the recipe based on the search results.
+- **Search Functionality**: Users can explore curated recipes (based on the the results of the questionnaire).
+- **Recipe Display**: A RecyclerView displays the recipe name and an image of the recipe.
+- **Clickable Recipes**: When pressed, the user will be brough to the **Recipe Details** screen, which will include detailed information about the recipe.
 
 #### Shopping List Screen
 - **Add Items**: Users can add items to the shopping list using a Floating Action Button, which opens a Dialog.
 - **Checkable Items**: Each item in the shopping list can be checked off once acquired.
+- **Deletable Items**: Each item in the shopping list can be deleted.
 
 #### Favorites Screen
 - **Favorite Recipes**: A RecyclerView displays all of the user's favorite recipes.
+- **Deletable Items**: Users can remove items from their favorites.
 
 #### Recipe Details Screen
 - **Recipe Information**: Clicking on a recipe in any RecyclerView brings the user to a detailed page, including:
@@ -40,15 +43,19 @@ This meal planner application for Android helps users discover and plan meals ba
   - Description
   - Ingredients needed
   - Detailed instructions
-    
-#### Settings Screen
-10. **User Preferences**: Users can view and update their preferences.
+- **Implicit Intent**: If the user clicks on the send arrow, they will be presented with the option to share the current recipe through email, messages, etc. The message includes:
+   - Source URL (URL of the original recipe)
+   - Recipe Name
+
+#### Search Screen
+- This activity allows users to search for recipes based on what they have in their pantry. Users can enter multiple items at once, or look for recipes that pertain to one specific item. When they click the search button, the recycler view is updated to match the entered search.
 
 ## Core Subjects from Syllabus
 
 ### Data Storage and Retrieval
 - **SharedPreferences**: For storing user preferences from the onboarding questionnaire.
 - **Firebase Authentication**: For user authentication and registration.
+- **Firebase Firestore**: For storing user favorites and shopping list.
 
 ### Networking and API Integration
 - **Retrofit**: For making network requests to the Spoonacular API to fetch recipes.
@@ -58,4 +65,8 @@ This meal planner application for Android helps users discover and plan meals ba
 - **Navigation Components**: For managing navigation and user flow in the app.
 - **Material Design**: For implementing user interface components like buttons, dialogs, and navigation bars.
 
-#### So far I have completed all of the UI, and the log-in, register, onboarding and home screen implementation. 
+### Other Concepts
+- **Fragments and Activities**: Each screen is a fragment, changes when different navigation icons are pressed.
+- **Implicit Intent**: Recipes are shareable.
+- **Recycler View**: Used for all recipe lists.
+- **Radio Buttons, Image Buttons, and Checkboxes**
