@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/questionnaireTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorTextPrimary"
         android:text="What's Your Dietary Preference?"
@@ -20,7 +20,7 @@
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        android:layout_marginTop="60dp" />
 
     <RadioGroup
         android:id="@+id/diet_radio_group"
@@ -40,6 +40,7 @@
             android:layout_height="wrap_content"
             android:text="Vegetarian"
             android:textSize="22sp"
+            android:buttonTint="@color/colorSecondary"
             android:textColor="@color/colorTextPrimary" />
 
         <RadioButton
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:text="Non-Vegetarian"
             android:textSize="22sp"
+            android:buttonTint="@color/colorSecondary"
             android:textColor="@color/colorTextPrimary" />
 
         <RadioButton
@@ -56,6 +58,7 @@
             android:layout_height="wrap_content"
             android:text="Pescetarian"
             android:textSize="22sp"
+            android:buttonTint="@color/colorSecondary"
             android:textColor="@color/colorTextPrimary" />
 
         <RadioButton
@@ -63,6 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Vegan"
+            android:buttonTint="@color/colorSecondary"
             android:textSize="22sp"
             android:textColor="@color/colorTextPrimary" />
 
@@ -72,6 +76,7 @@
             android:layout_height="wrap_content"
             android:text="Paleo"
             android:textSize="22sp"
+            android:buttonTint="@color/colorSecondary"
             android:textColor="@color/colorTextPrimary" />
     </RadioGroup>
 

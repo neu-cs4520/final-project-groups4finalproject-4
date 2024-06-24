@@ -1,8 +1,6 @@
 package com.example.finalproject;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -27,14 +25,14 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link SearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements OnRecipeClickListener{
+public class SearchFragment extends Fragment  implements OnRecipeClickListener{
 
     EditText searchEditText;
     Button searchButton;
-    
+
     private RecyclerView recipesRecyclerView;
     private RecipeAdapter recipeAdapter;
     private List<Recipe> recipeList = new ArrayList<>();
@@ -48,7 +46,7 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
     private String mParam1;
     private String mParam2;
 
-    public HomeFragment() {
+    public SearchFragment() {
         // Required empty public constructor
     }
 
@@ -58,11 +56,11 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment SettingsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static SearchFragment newInstance(String param1, String param2) {
+        SearchFragment fragment = new SearchFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,15 +75,16 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+
+        searchEditText = view.findViewById(R.id.searchEditText);
+        searchButton = view.findViewById(R.id.searchButton);
 
         recipesRecyclerView = view.findViewById(R.id.recipesRecyclerView);
 
@@ -93,20 +92,22 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
         recipeAdapter = new RecipeAdapter(getContext(), recipeList, this);
         recipesRecyclerView.setAdapter(recipeAdapter);
 
-        SharedPreferences preferences = getActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
-        String dietPreference = preferences.getString("dietPref", "");
-
-        searchRecipes(dietPreference);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String search = searchEditText.getText().toString().trim();
+                searchRecipes(search);
+            }
+        });
 
         return view;
-
     }
 
     private void searchRecipes(String query) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
             RecipeService service = RetrofitClient.getRetrofitInstance().create(RecipeService.class);
-            Call<Recipe> call = service.curatedRecipes(query, "e5afecc7fd7b418591fffe0909278f72");
+            Call<Recipe> call = service.searchRecipes(query, "e5afecc7fd7b418591fffe0909278f72");
 
             try {
                 Response<Recipe> response = call.execute();
@@ -118,10 +119,10 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
                         getActivity().runOnUiThread(() -> recipeAdapter.notifyDataSetChanged());
                     }
                 } else {
-                    Log.e("HomeFragment", "Request failed with code: " + response.code());
+                    Log.e("SearchFragment", "Request failed with code: " + response.code());
                 }
             } catch (IOException e) {
-                Log.e("HomeFragment", "Network request failed", e);
+                Log.e("SearchFragment", "Network request failed", e);
             }
         });
     }
@@ -130,10 +131,7 @@ public class HomeFragment extends Fragment implements OnRecipeClickListener{
     public void onRecipeClick(int position) {
         Intent intent = new Intent(getContext(), RecipeDetailsActivity.class);
         Recipe recipe = recipeList.get(position);
-        //intent.putExtra("recipe_details", recipe);
         intent.putExtra("recipe_id", recipe.getId());
         startActivity(intent);
     }
-
-
 }

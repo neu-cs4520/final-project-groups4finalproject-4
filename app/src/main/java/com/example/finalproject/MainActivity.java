@@ -7,9 +7,6 @@ import android.view.MenuItem;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -38,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 } else if (id == R.id.navigation_favorites) {
                     selectedFragment = new FavoritesFragment();
                     Log.i(TAG, "Favorites Fragment pressed");
-                } else if (id == R.id. navigation_settings) {
-                    selectedFragment = new SettingsFragment();
-                    Log.i(TAG, "Settings Fragment pressed");
+                } else if (id == R.id. navigation_search) {
+                    selectedFragment = new SearchFragment();
+                    Log.i(TAG, "Search Fragment pressed");
 
                 } else if (id == R.id.navigation_shopping_list) {
                     selectedFragment = new ShoppingListFragment();

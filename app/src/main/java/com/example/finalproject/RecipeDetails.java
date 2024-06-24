@@ -1,46 +1,142 @@
 package com.example.finalproject;
 
-import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.TextView;
+import com.google.gson.annotations.SerializedName;
 
-import androidx.activity.EdgeToEdge;
-import androidx.appcompat.app.AppCompatActivity;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-import com.bumptech.glide.Glide;
+public class RecipeDetails implements Serializable {
 
-public class RecipeDetails extends AppCompatActivity {
+    public RecipeDetails() {}
 
-    ImageView recipeImage;
-    TextView recipeName, recipeDescription, recipeIngredients, recipeInstructions;
+    // Constructor
+    public RecipeDetails(int id, String title, String summary, String image, int readyInMinutes, List<Ingredient> extendedIngredients, String instructions, String sourceUrl) {
+        this.id = id;
+        this.title = title;
+        this.summary = summary;
+        this.image = image;
+        this.readyInMinutes = readyInMinutes;
+        this.extendedIngredients = extendedIngredients;
+        this.instructions = instructions;
+        this.sourceUrl = sourceUrl;
+    }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_recipe_details);
+    public Recipe toRecipe() {
+        List<String> ingredients = new ArrayList<>();
+        for (Ingredient ingredient : extendedIngredients) {
+            ingredients.add(ingredient.getOriginal());
+        }
+        return new Recipe(id, title, summary, image, readyInMinutes, ingredients, instructions, sourceUrl);
+    }
 
-        recipeImage = findViewById(R.id.recipe_image);
-        recipeName = findViewById(R.id.recipe_name);
-        recipeDescription = findViewById(R.id.recipe_description);
-        recipeIngredients = findViewById(R.id.recipeIngredientsContentTextView);
-        recipeInstructions = findViewById(R.id.recipeInstructionsContentTextView);
 
-        if (getIntent() != null && getIntent().hasExtra("recipe")) {
-            Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
+    @SerializedName("id")
+    private int id;
 
-            if (recipe != null) {
-                // Set the recipe details to the views
-                Glide.with(this).load(recipe.getImage()).into(recipeImage);
-                recipeName.setText(recipe.getTitle());
-                recipeDescription.setText(recipe.getSummary());
+    @SerializedName("title")
+    private String title;
 
-                // Assuming Recipe model has getIngredients() and getInstructions() methods
-                recipeIngredients.setText(recipe.getIngredients());
-                recipeInstructions.setText(recipe.getInstructions());
-            }
+    @SerializedName("image")
+    private String image;
+
+    @SerializedName("summary")
+    private String summary;
+
+    @SerializedName("readyInMinutes")
+    private int readyInMinutes;
+
+    @SerializedName("instructions")
+    private String instructions;
+
+    @SerializedName("sourceUrl")
+    private String sourceUrl;
+
+    @SerializedName("extendedIngredients")
+    private List<Ingredient> extendedIngredients;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public String getSourceUrl() {
+        return sourceUrl;
+    }
+
+    public void setSourceUrl(String sourceUrl) {
+        this.sourceUrl = sourceUrl;
+    }
+
+    public int getReadyInMinutes() {
+        return readyInMinutes;
+    }
+
+    public void setReadyInMinutes(int readyInMinutes) {
+        this.readyInMinutes = readyInMinutes;
+    }
+
+    public List<Ingredient> getExtendedIngredients() {
+        return extendedIngredients;
+    }
+
+    public void setExtendedIngredients(List<Ingredient> extendedIngredients) {
+        this.extendedIngredients = extendedIngredients;
+    }
+
+    public static class Ingredient implements Serializable {
+
+        @SerializedName("original")
+        private String original;
+
+        public Ingredient(String original) {
+            this.original = original;
         }
 
+        public String getOriginal() {
+            return original;
+        }
 
+        public void setOriginal(String original) {
+            this.original = original;
+        }
     }
+
+
+
 }

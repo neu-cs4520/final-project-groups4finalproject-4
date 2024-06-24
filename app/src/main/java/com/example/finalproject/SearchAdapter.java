@@ -16,13 +16,13 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 
-public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.RecipeViewHolder> {
 
     private List<Recipe> recipeList;
     private Context context;
     OnRecipeClickListener onRecipeClickListener;
 
-    public RecipeAdapter(Context context, List<Recipe> recipeList, OnRecipeClickListener onRecipeClickListener) {
+    public SearchAdapter(Context context, List<Recipe> recipeList, OnRecipeClickListener onRecipeClickListener) {
         this.context = context;
         this.recipeList = recipeList;
         this.onRecipeClickListener = onRecipeClickListener;

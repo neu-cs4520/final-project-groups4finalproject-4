@@ -3,8 +3,11 @@ package com.example.finalproject;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class Recipe implements Serializable {
+
+
     @SerializedName("id")
     private int id;
 
@@ -13,6 +16,38 @@ public class Recipe implements Serializable {
 
     @SerializedName("image")
     private String image;
+
+    @SerializedName("results")
+    private List<Recipe> results;
+
+    private int readyInMinutes;
+    private List<String> ingredients;
+    private String instructions;
+    private String description;
+    private String sourceUrl;
+
+    // Empty constructor required for Firestore
+    public Recipe() {}
+
+    // Constructor
+    public Recipe(int id, String title, String description, String image, int readyInMinutes, List<String> ingredients, String instructions, String sourceUrl) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.readyInMinutes = readyInMinutes;
+        this.ingredients = ingredients;
+        this.instructions = instructions;
+        this.sourceUrl = sourceUrl;
+    }
+
+    public List<Recipe> getResults() {
+        return results;
+    }
+
+    public void setResults(List<Recipe> results) {
+        this.results = results;
+    }
 
     // Add other necessary fields and their getters and setters
 
@@ -39,19 +74,5 @@ public class Recipe implements Serializable {
     public void setImage(String image) {
         this.image = image;
     }
-
-    // Implement methods for ingredients and instructions as needed
-    public String getIngredients() {
-        // Placeholder method for getting ingredients
-        return "Ingredients list here";
     }
 
-    public String getInstructions() {
-        // Placeholder method for getting instructions
-        return "Instructions here";
-    }
-
-    public int getSummary() {
-        return 1;
-    }
-}
